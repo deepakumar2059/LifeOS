@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.env.local
+*.env
+*.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Runtime Data (generated/user-specific)
+backend/data/
+backend/chroma_db/
+backend/tools/chroma_db/
+backend/tools/data/
+chroma_db/
+
+# Credentials & Secrets
+client_secrets.json
+credentials.json
+backend/tools/credentials.json
+backend/data/google_tokens/
+
+# Database
+*.sqlite3
+*.db
+
+# Logs
+*.log

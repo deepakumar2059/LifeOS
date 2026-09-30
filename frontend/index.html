@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeOS</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <section id="authView" class="auth-shell">
+        <form id="authForm" class="auth-panel">
+            <div>
+                <p class="eyebrow">Personal productivity agent</p>
+                <h1>LifeOS</h1>
+                <p class="muted">Sign in to manage tasks, documents, Gmail, Calendar, and your short-term agent session.</p>
+            </div>
+            <div class="field-stack">
+                <label>Email<input id="authEmail" type="email" autocomplete="email" required></label>
+                <label>Password<input id="authPassword" type="password" autocomplete="current-password" minlength="6" required></label>
+            </div>
+            <div class="auth-actions">
+                <button class="primary" type="submit" data-mode="login">Log in</button>
+                <button class="secondary" type="button" id="registerBtn">Register</button>
+            </div>
+            <p id="authMessage" class="message"></p>
+        </form>
+    </section>
+
+    <div id="appView" class="app hidden">
+        <aside class="sidebar">
+            <div class="brand">
+                <strong>LifeOS</strong>
+                <span>v1</span>
+            </div>
+            <nav class="menu">
+                <button class="menu-item active" data-page="dashboard">Dashboard</button>
+                <button class="menu-item" data-page="chat">Agent</button>
+                <button class="menu-item" data-page="tasks">Tasks</button>
+                <button class="menu-item" data-page="knowledge">Knowledge</button>
+                <button class="menu-item" data-page="tools">Tools</button>
+            </nav>
+            <button id="logoutBtn" class="ghost">Log out</button>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">Workspace</p>
+                    <h2 id="pageTitle">Dashboard</h2>
+                </div>
+                <div class="user-pill" id="userEmail">User</div>
+            </header>
+
+            <section id="dashboard" class="page">
+                <div class="intro">
+                    <h1>Run your day from one place.</h1>
+                    <p>Ask the Gemini-powered LifeOS agent to manage pending tasks, search uploaded documents, and use Gmail or Calendar after you connect them.</p>
+                </div>
+                <div class="status-grid">
+                    <article><span>Documents</span><strong id="docCount">0</strong></article>
+                    <article><span>Tasks</span><strong id="taskCount">0</strong></article>
+                    <article><span>Gmail</span><strong id="gmailStatus">Off</strong></article>
+                    <article><span>Calendar</span><strong id="calendarStatus">Off</strong></article>
+                </div>
+            </section>
+
+            <section id="chat" class="page hidden">
+                <div id="chatLog" class="chat-log"></div>
+                <form id="chatForm" class="composer">
+                    <input id="questionInput" placeholder="Ask LifeOS about tasks, email, calendar, or your documents" required>
+                    <button class="primary" type="submit">Send</button>
+                </form>
+            </section>
+
+            <section id="tasks" class="page hidden">
+                <div class="section-head">
+                    <div><h3>Pending Tasks</h3><p class="muted">Tasks can be created from chat and reviewed here.</p></div>
+                    <button id="refreshTasksBtn" class="secondary">Refresh</button>
+                </div>
+                <div id="taskList" class="list"></div>
+            </section>
+
+            <section id="knowledge" class="page hidden">
+                <div class="section-head">
+                    <div><h3>Knowledge Base</h3><p class="muted">Upload PDF or DOCX files. ChromaDB persists embeddings after restart.</p></div>
+                </div>
+                <form id="uploadForm" class="upload-box">
+                    <input id="documentInput" type="file" accept=".pdf,.docx" required>
+                    <button class="primary" type="submit">Upload</button>
+                </form>
+                <form id="searchForm" class="search-row">
+                    <input id="searchInput" placeholder="Search your uploaded knowledge base" required>
+                    <button class="secondary" type="submit">Search</button>
+                </form>
+                <div id="searchResults" class="results"></div>
+                <h4>Uploaded files</h4>
+                <div id="documentList" class="list"></div>
+            </section>
+
+            <section id="tools" class="page hidden">
+                <div class="tool-grid">
+                    <article class="tool-card">
+                        <h3>Google OAuth</h3>
+                        <p class="muted">Connect once, then choose whether Gmail and Calendar are available to the agent.</p>
+                        <div class="button-row">
+                            <button id="connectGoogleBtn" class="primary">Connect Google</button>
+                            <button id="disconnectGoogleBtn" class="secondary">Disconnect</button>
+                        </div>
+                        <p id="googleCredsMessage" class="message"></p>
+                    </article>
+                    <article class="tool-card">
+                        <h3>Agent Tools</h3>
+                        <label class="toggle"><input id="gmailToggle" type="checkbox"> Gmail tools</label>
+                        <label class="toggle"><input id="calendarToggle" type="checkbox"> Calendar tools</label>
+                    </article>
+                    <article class="tool-card">
+                        <h3>Memory</h3>
+                        <p class="muted">LifeOS keeps short-term conversation context for this login session only. Long-term memory is intentionally disabled in this version.</p>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
